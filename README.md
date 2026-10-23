@@ -11,6 +11,54 @@ A computer vision project focused on coin detection using YOLOv10 and YOLOv11 ob
 - Visualize predictions using bounding boxes and class confidence scores.
 - Provide an inference script and example images.
 
+## Dataset Overview
+
+The coin dataset contains 4,678 training images and 1,001 validation images across 20 classes.
+
+### Class Distribution
+
+The chart below shows the number of instances per class, sorted from highest to lowest frequency.
+
+![Class distribution of the coin dataset](examples/class_distribution.png)
+
+The dataset has an imbalanced class distribution. Therefore, model performance should be evaluated using multiple metrics, including precision, recall, mAP@50, and mAP@50–95.
+
+### Dataset Configuration
+
+The YOLO dataset configuration is available here:
+
+[`configs/coins.yaml`](configs/coins.yaml)
+
+The full dataset is not included in this repository. Contact the repository owner to request access to the dataset.
+
+## Dataset Preprocessing
+
+The `scripts/` directory contains utilities for dataset preprocessing and analysis.
+
+- [`coins.py`](scripts/coins.py) — converts Pascal VOC XML annotations into YOLO format and normalizes known label variations.
+- [`class_distribution.py`](scripts/class_distribution.py) — counts class instances from YOLO label files and generates a class distribution chart.
+
+These scripts require the appropriate local dataset paths to be configured before execution.
+
+## Experiment Report
+
+The complete experiment report is available below:
+
+[**View the Coins Report (PDF)**](docs/dataset/Coins_Report.pdf)
+
+The report contains dataset information and evaluation results for YOLOv10 and YOLOv11 model variants.
+
+## Reproducibility
+
+To reproduce the experiments, you will need:
+
+- Python installed in your environment.
+- The dependencies listed in [`requirements.txt`](requirements.txt).
+- Access to the coin dataset.
+- The trained model weights, which are not included in this repository.
+
+Refer to [`docs/USAGE.md`](docs/USAGE.md) for usage instructions.
+
 ## Models
 
 The experiments cover the following model configurations:
@@ -62,32 +110,6 @@ coin-detection-yolo/
 
 Each model directory contains selected experiment artifacts, including training metrics, result plots, confusion matrices, F1 curves, training arguments, and validation batch visualizations.
 
-## Installation
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/YOUR_USERNAME/coin-detection-yolo.git
-cd coin-detection-yolo
-```
-
-Replace `YOUR_USERNAME` with your GitHub username.
-
-### 2. Create a Virtual Environment
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-### 3. Install Dependencies
-
-```bash
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-```
-
-The dependency versions should be verified against the environment used for inference.
 
 ## Inference
 
@@ -178,13 +200,3 @@ The `val_batch*_pred.jpg` files contain model predictions, while `val_batch*_lab
 
 Trained model weights (`.pt` files) are not included in this public repository. They are stored separately and are not distributed through GitHub.
 
-## Limitations
-
-- Running inference requires a compatible trained weights file.
-- Metrics in the comparison table come from the final recorded epoch, not necessarily the best checkpoint.
-- Training and validation visualizations reflect the recorded experiments.
-- Dataset access and redistribution are subject to the dataset owner's approval and applicable permissions.
-
-## License
-
-A license has not yet been added. Licensing terms will be decided before the project is published for reuse.
