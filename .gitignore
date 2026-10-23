@@ -12,8 +12,7 @@ venv/
 *.engine
 
 # Private datasets
-dataset/
-datasets/
+/dataset/datasets/
 final_dataset/
 yolo_dataset/
 *.zip
