@@ -1,0 +1,34 @@
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Trained model weights
+*.pt
+*.pth
+*.onnx
+*.engine
+
+# Private datasets
+dataset/
+datasets/
+final_dataset/
+yolo_dataset/
+*.zip
+
+# YOLO cache files
+*.cache
+
+# Training outputs
+runs/
+wandb/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
