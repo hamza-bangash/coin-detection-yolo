@@ -120,7 +120,9 @@ coin-detection-yolo/
 │   │   └── model_n/ model_s/ model_m/ model_l/
 │   ├── model_comparison.csv
 │   ├── comparison.md
-│   └── top3_per_class_ap.md
+│   ├── comparison_curves.png
+│   ├── top3_per_class_ap.md
+│   └── top3_per_class_ap.csv / top3_per_class_ap_50_95.csv
 ├── scripts/
 ├── src/
 │   └── predict.py
@@ -215,6 +217,10 @@ Metrics from the final recorded epoch of each run, sorted by mAP@50. YOLOv8 and 
 | 14 | yolo26_l | 100 | 0.9348 | 0.9025 | 0.9326 | 0.6592 |
 | 15 | yolo26_m | 100 | 0.9376 | 0.8996 | 0.9317 | 0.6530 |
 | 16 | yolo8_l | 100 | 0.9198 | 0.9095 | 0.9262 | 0.6427 |
+
+![Model comparison: validation mAP@50 per epoch (YOLOv8 / YOLO26) and final-epoch mAP@50 of all models](results/comparison_curves.png)
+
+*Left: validation mAP@50 per epoch for the YOLOv8 and YOLO26 runs (per-epoch logs of the YOLOv10 / YOLOv11 runs are in their `results.csv` files). Right: final-epoch mAP@50 of all 16 models.*
 
 ### Top-3 YOLOv8 / YOLO26 Models
 
