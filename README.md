@@ -48,7 +48,7 @@ The complete experiment report is available below:
 
 [**View the Coins Report (PDF)**](docs/dataset/Coins_Report.pdf)
 
-The report contains dataset information and evaluation results for the YOLOv10 and YOLOv11 model variants. The YOLOv8 and YOLO26 results are in [`results/comparison.md`](results/comparison.md).
+The report contains dataset information and evaluation results for the YOLOv10 and YOLOv11 model variants (pages 1–7), followed by the YOLOv8 and YOLO26 results (pages 8–13): a summary table, training curves for every model, and the per-class AP of the Top-3 models. The same results are also in [`results/comparison.md`](results/comparison.md).
 
 ## Reproducibility
 

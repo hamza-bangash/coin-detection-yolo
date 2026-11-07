@@ -1,7 +1,7 @@
 task: detect
 mode: train
 model: yolov8s.pt
-data: C:\Users\moust\Downloads\coins\final_dataset\coins.yaml
+data: configs/coins.yaml
 epochs: 100
 time: null
 patience: 100
@@ -12,7 +12,7 @@ save_period: -1
 cache: false
 device: "0"
 workers: 4
-project: C:\Users\moust\Downloads\coins\runs\yolo8
+project: runs
 name: model_s
 exist_ok: true
 pretrained: true
@@ -112,4 +112,4 @@ auto_augment: randaugment
 erasing: 0.4
 cfg: null
 tracker: tracktrack.yaml
-save_dir: C:\Users\moust\Downloads\coins\runs\yolo8\model_s
+save_dir: runs/yolo8/model_s
