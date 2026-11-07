@@ -10,6 +10,8 @@ venv/
 *.pth
 *.onnx
 *.engine
+# ...except the published Top-3 weights
+!weights/*.pt
 
 # Private datasets
 /dataset/datasets/

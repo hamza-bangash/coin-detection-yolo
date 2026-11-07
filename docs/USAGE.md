@@ -32,9 +32,9 @@ pip install -r requirements.txt
 
 ## 4. Obtain model weights
 
-Trained weights are not included in this repository.
+The Top-3 YOLOv8 / YOLO26 weights are included in the `weights/` folder of this repository (`yolov8n_best.pt`, `yolov8s_best.pt`, `yolo26s_best.pt`). You can use them directly, for example `--weights weights/yolov8n_best.pt`.
 
-Use a model weights file that you are authorized to access. Keep it outside the repository, for example in a directory named `models/` in your home directory.
+Weights of other models are not included. For those, use a weights file that you are authorized to access and keep it outside the repository.
 
 ## 5. Run inference on one image
 

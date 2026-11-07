@@ -55,7 +55,7 @@ To reproduce the experiments, you will need:
 - Python installed in your environment.
 - The dependencies listed in [`requirements.txt`](requirements.txt).
 - Access to the coin dataset.
-- The trained model weights, which are not included in this repository.
+- Trained model weights (the Top-3 are included in [`weights/`](weights/)).
 
 Refer to [`docs/USAGE.md`](docs/USAGE.md) for usage instructions.
 
@@ -112,6 +112,8 @@ coin-detection-yolo/
 ├── scripts/
 ├── src/
 │   └── predict.py
+├── weights/
+│   └── yolov8n_best.pt, yolov8s_best.pt, yolo26s_best.pt
 ├── .gitignore
 ├── requirements.txt
 └── README.md
@@ -124,7 +126,7 @@ Each model directory contains selected experiment artifacts, including training 
 
 The repository includes an inference script at `src/predict.py`. A compatible trained model weights file is required to run predictions.
 
-Trained weights are not included in this public repository. Obtain an authorized weights file separately and keep it outside the repository.
+The Top-3 YOLOv8 / YOLO26 weights are included in [`weights/`](weights/) (see [Model Weights](#model-weights)). For other models, obtain a compatible weights file separately.
 
 ### Run Inference on One Image
 
@@ -240,5 +242,19 @@ The `val_batch*_pred.jpg` files contain model predictions, while `val_batch*_lab
 
 ## Model Weights
 
-Trained model weights (`.pt` files) are not included in this public repository. They are stored separately and are not distributed through GitHub.
+The weights (`best.pt`) of the Top-3 YOLOv8 / YOLO26 models are included in [`weights/`](weights/):
+
+| File | Model | mAP@50 | mAP@50–95 | Size |
+|---|---|---|---|---|
+| [`yolov8n_best.pt`](weights/yolov8n_best.pt) | YOLOv8n | 0.9467 | 0.6674 | 6.2 MB |
+| [`yolov8s_best.pt`](weights/yolov8s_best.pt) | YOLOv8s | 0.9444 | 0.6642 | 21.5 MB |
+| [`yolo26s_best.pt`](weights/yolo26s_best.pt) | YOLO26s | 0.9399 | 0.6597 | 19.4 MB |
+
+Example:
+
+```bash
+python src/predict.py --weights weights/yolov8n_best.pt --source examples/images/0003649.jpg
+```
+
+Weights of the other trained models (and of the YOLOv10 / YOLOv11 runs) are not included in this repository.
 
