@@ -1,11 +1,11 @@
 
-# Coin Detection Using YOLOv10 and YOLOv11
+# Coin Detection Using YOLOv8, YOLOv10, YOLOv11 and YOLO26
 
-A computer vision project focused on coin detection using YOLOv10 and YOLOv11 object detection models. The project explores eight model configurations, compares their recorded performance, and includes training visualizations, validation predictions, and evaluation results.
+A computer vision project focused on coin detection using YOLOv8, YOLOv10, YOLOv11 and YOLO26 object detection models. The project explores sixteen model configurations, compares their recorded performance, and includes training visualizations, validation predictions, and evaluation results.
 
 ## Objectives
 
-- Train and evaluate YOLOv10 and YOLOv11 for coin detection.
+- Train and evaluate YOLOv8, YOLOv10, YOLOv11 and YOLO26 for coin detection.
 - Compare Nano (n), Small (s), Medium (m), and Large (l) model variants.
 - Analyze training and validation metrics.
 - Visualize predictions using bounding boxes and class confidence scores.
@@ -46,7 +46,7 @@ The complete experiment report is available below:
 
 [**View the Coins Report (PDF)**](docs/dataset/Coins_Report.pdf)
 
-The report contains dataset information and evaluation results for YOLOv10 and YOLOv11 model variants.
+The report contains dataset information and evaluation results for the YOLOv10 and YOLOv11 model variants. The YOLOv8 and YOLO26 results are in [`results/comparison.md`](results/comparison.md).
 
 ## Reproducibility
 
@@ -65,8 +65,12 @@ The experiments cover the following model configurations:
 
 | Model Family | Variants |
 |---|---|
+| YOLOv8 | YOLOv8n, YOLOv8s, YOLOv8m, YOLOv8l |
 | YOLOv10 | YOLOv10n, YOLOv10s, YOLOv10m, YOLOv10l |
 | YOLOv11 | YOLOv11n, YOLOv11s, YOLOv11m, YOLOv11l |
+| YOLO26 | YOLO26n, YOLO26s, YOLO26m, YOLO26l |
+
+YOLOv8 and YOLO26 were trained for the full 100 epochs with `imgsz=448`, `batch=16`, `seed=0` and default augmentation, using [`scripts/train_compare.py`](scripts/train_compare.py). The same script builds the comparison table, the train/validation graphs and the per-class AP tables.
 
 ## Dataset
 
@@ -88,6 +92,8 @@ coin-detection-yolo/
 ├── examples/
 │   └── images/
 ├── results/
+│   ├── yolo8/
+│   │   └── model_n/ model_s/ model_m/ model_l/
 │   ├── yolo10/
 │   │   ├── model_n/
 │   │   ├── model_s/
@@ -98,8 +104,11 @@ coin-detection-yolo/
 │   │   ├── model_s/
 │   │   ├── model_m/
 │   │   └── model_l/
+│   ├── yolo26/
+│   │   └── model_n/ model_s/ model_m/ model_l/
 │   ├── model_comparison.csv
-│   └── comparison.md
+│   ├── comparison.md
+│   └── top3_per_class_ap.md
 ├── scripts/
 ├── src/
 │   └── predict.py
@@ -152,7 +161,11 @@ See [`docs/USAGE.md`](docs/USAGE.md) for additional instructions.
 
 ## Results
 
-The following graphs provide a quick overview of the training results. Detailed artifacts for all eight model configurations are available in the repository.
+The following graphs provide a quick overview of the training results. Detailed artifacts for all sixteen model configurations are available in the repository.
+
+### YOLOv8
+
+![YOLOv8 Nano Training Results](results/yolo8/model_n/results.png)
 
 ### YOLOv10
 
@@ -162,10 +175,29 @@ The following graphs provide a quick overview of the training results. Detailed 
 
 ![YOLOv11 Nano Training Results](results/yolo11/model_n/results.png)
 
+### YOLO26
+
+![YOLO26 Nano Training Results](results/yolo26/model_n/results.png)
+
+### Top-3 YOLOv8 / YOLO26 Models
+
+Ranked by mAP@50 (final epoch) among the YOLOv8 and YOLO26 models:
+
+| Rank | Model | Precision | Recall | mAP@50 | mAP@50–95 |
+|---|---|---|---|---|---|
+| 1 | yolov8n | 0.9393 | 0.9036 | 0.9467 | 0.6674 |
+| 2 | yolov8s | 0.9391 | 0.9004 | 0.9444 | 0.6642 |
+| 3 | yolo26s | 0.9322 | 0.9017 | 0.9399 | 0.6597 |
+
+Per-class AP for these three models is in [`results/top3_per_class_ap.md`](results/top3_per_class_ap.md). Class `G` is the weakest (AP@50 about 0.59–0.63); it is one of the rarest classes in the dataset.
+
 ### Explore All Results
 
+- [YOLOv8 experiment artifacts](results/yolo8/)
 - [YOLOv10 experiment artifacts](results/yolo10/)
 - [YOLOv11 experiment artifacts](results/yolo11/)
+- [YOLO26 experiment artifacts](results/yolo26/)
+- [Per-class AP of the Top-3 models](results/top3_per_class_ap.md)
 - [Complete model comparison](results/comparison.md)
 - [Recorded metrics in CSV format](results/model_comparison.csv)
 
@@ -175,6 +207,10 @@ The comparison table reports metrics from the final recorded epoch of each train
 
 The following images show examples of validation predictions produced during the experiments. Colored bounding boxes and labels visualize the model's detections.
 
+### YOLOv8
+
+![YOLOv8 Validation Predictions](results/yolo8/model_n/val_batch2_pred.jpg)
+
 ### YOLOv10
 
 ![YOLOv10 Validation Predictions](results/yolo10/model_n/val_batch2_pred.jpg)
@@ -183,8 +219,14 @@ The following images show examples of validation predictions produced during the
 
 ![YOLOv11 Validation Predictions](results/yolo11/model_n/val_batch2_pred.jpg)
 
+### YOLO26
+
+![YOLO26 Validation Predictions](results/yolo26/model_n/val_batch2_pred.jpg)
+
 Additional prediction batches and ground-truth label visualizations are available in the corresponding model directories:
 
+- [YOLOv8 Nano](results/yolo8/model_n/), [Small](results/yolo8/model_s/), [Medium](results/yolo8/model_m/), [Large](results/yolo8/model_l/)
+- [YOLO26 Nano](results/yolo26/model_n/), [Small](results/yolo26/model_s/), [Medium](results/yolo26/model_m/), [Large](results/yolo26/model_l/)
 - [YOLOv10 Nano](results/yolo10/model_n/)
 - [YOLOv10 Small](results/yolo10/model_s/)
 - [YOLOv10 Medium](results/yolo10/model_m/)
